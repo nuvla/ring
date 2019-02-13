@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>sixsq.nuvla.ring</groupId>
+  <artifactId>parent</artifactId>
+  <version>3.69-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>ring</name>
+  <url>http://sixsq.com/</url>
+
+  <parent>
+    <groupId>com.sixsq.slipstream</groupId>
+    <artifactId>SlipStreamCommunity</artifactId>
+    <version>3.69-SNAPSHOT</version>
+    <relativePath>../SlipStream/community</relativePath>
+  </parent>
+
+  <modules>
+    <module>code</module>
+    <module>container</module>
+  </modules>
+
+  <scm>
+    <connection>${scm.read}/server.git</connection>
+    <developerConnection>${scm.write}/server.git</developerConnection>
+    <url>${scm.public}/server.git</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <properties>
+
+    <logger.level>INFO</logger.level>
+    <logger.filepattern>${project.build.directory}/instance/server/var/log/slipstream.%g
+    </logger.filepattern>
+    <server.jre.version>1.8.0</server.jre.version>
+    
+    <!-- root URL for the nexus repositories         -->
+    <!-- The value should NOT have a trailing slash! -->
+    <nexus>https://nexus.sixsq.com/content/repositories</nexus>
+
+  </properties>
+
+  <repositories>
+
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+      <id>slipstream.releases</id>
+      <name>SlipStream Releases</name>
+      <url>https://nexus.sixsq.com/content/repositories/releases-community-rhel7</url>
+    </repository>
+
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>slipstream.snapshots</id>
+      <name>SlipStream Snapshots</name>
+      <url>https://nexus.sixsq.com/content/repositories/snapshots-community-rhel7</url>
+    </repository>
+
+  </repositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>offline</id>
+            <goals>
+              <goal>go-offline</goal>
+            </goals>
+            <configuration>
+              <excludeGroupIds>sixsq.nuvla.server</excludeGroupIds>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
