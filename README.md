@@ -1,18 +1,15 @@
-Nuvla Ring Container
-====================
+# Nuvla Ring Container
 
 This repository contains the code and configuration to create a simple
 ring-based Docker container for web applications.  Build from the
 generated image and just add your ring handler.  See the README files
 in the subdirectories for more information.
 
-Copyright
----------
+## Copyright
 
 Copyright &copy; 2019, SixSq Sàrl
 
-License
--------
+## License
 
 Licensed under the Apache License, Version 2.0 (the "License"); you
 may not use this file except in compliance with the License.  You may
