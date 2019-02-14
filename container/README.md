@@ -16,15 +16,31 @@ Running Example
 To run this, do the following:
 
 ```sh
-docker run -p 5000:5000 nuvla/ring-container
+docker run -p 8200:8200 nuvla/ring-container
 ```
 
 The example service will be available on
-http://localhost:5000/example, which should respond with the message
+http://localhost:8200/example, which should respond with the message
 "Ring Example Running!".
 
 Running Other Ring Handlers
 ---------------------------
 
-To use a different ring handler, configure the port, or configure the
-host, see the README in the ring module.
+To use a different ring handler (i.e. run a different service), you
+must provide the namespace for the init function as an environmental
+variable:
+
+```sh
+NUVLA_SERVER_INIT=sixsq.nuvla.server.example/init
+```
+
+You can also modify the variables:
+
+```sh
+NUVLA_SERVER_HOST=0.0.0.0
+NUVLA_SERVER_PORT=8200
+```
+
+The example shows the default values.  If you modify the port, you
+should also modify the "exposes" and "ports" parameters in your
+Dockerfile.

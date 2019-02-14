@@ -9,10 +9,9 @@
   <url>http://sixsq.com/</url>
 
   <parent>
-    <groupId>com.sixsq.slipstream</groupId>
-    <artifactId>SlipStreamCommunity</artifactId>
-    <version>3.69-SNAPSHOT</version>
-    <relativePath>../SlipStream/community</relativePath>
+    <groupId>sixsq.nuvla.parent</groupId>
+    <artifactId>pom</artifactId>
+    <version>1.0.0</version>
   </parent>
 
   <modules>
@@ -27,19 +26,6 @@
     <tag>HEAD</tag>
   </scm>
 
-  <properties>
-
-    <logger.level>INFO</logger.level>
-    <logger.filepattern>${project.build.directory}/instance/server/var/log/slipstream.%g
-    </logger.filepattern>
-    <server.jre.version>1.8.0</server.jre.version>
-    
-    <!-- root URL for the nexus repositories         -->
-    <!-- The value should NOT have a trailing slash! -->
-    <nexus>https://nexus.sixsq.com/content/repositories</nexus>
-
-  </properties>
-
   <repositories>
 
     <repository>
@@ -49,9 +35,9 @@
       <snapshots>
         <enabled>false</enabled>
       </snapshots>
-      <id>slipstream.releases</id>
-      <name>SlipStream Releases</name>
-      <url>https://nexus.sixsq.com/content/repositories/releases-community-rhel7</url>
+      <id>nuvla.releases</id>
+      <name>Nuvla Releases</name>
+      <url>https://nexus.sixsq.com/content/repositories/nuvla-releases</url>
     </repository>
 
     <repository>
@@ -61,9 +47,9 @@
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
-      <id>slipstream.snapshots</id>
-      <name>SlipStream Snapshots</name>
-      <url>https://nexus.sixsq.com/content/repositories/snapshots-community-rhel7</url>
+      <id>nuvla.snapshots</id>
+      <name>Nuvla Snapshots</name>
+      <url>https://nexus.sixsq.com/content/repositories/nuvla-snapshots</url>
     </repository>
 
   </repositories>

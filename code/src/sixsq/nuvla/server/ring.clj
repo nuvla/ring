@@ -14,7 +14,7 @@
 (def ^:const default-port 8200)
 
 
-(def ^:const default-host "127.0.0.1")
+(def ^:const default-host "0.0.0.0")
 
 
 (defn- log-and-throw

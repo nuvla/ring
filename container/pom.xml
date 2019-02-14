@@ -106,11 +106,9 @@
                 </runCmds>
                 <env>
                   <NUVLA_SERVER_INIT>sixsq.nuvla.server.example/init</NUVLA_SERVER_INIT>
-                  <NUVLA_SERVER_PORT>5000</NUVLA_SERVER_PORT>
-                  <NUVLA_SERVER_HOST>0.0.0.0</NUVLA_SERVER_HOST>
                 </env>
                 <ports>
-                  <port>5000</port>
+                  <port>8200</port>
                 </ports>
                 <tags>
                   <tag>${project.version}</tag>
