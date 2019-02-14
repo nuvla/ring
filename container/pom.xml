@@ -63,72 +63,26 @@
       </plugin>
 
       <plugin>
-        <groupId>io.fabric8</groupId>
-        <artifactId>docker-maven-plugin</artifactId>
-        <version>0.24.0</version>
-        <configuration>
-          <images>
-            <image>
-              <alias>ring</alias>
-              <name>nuvla/ring</name>
-              <build>
-                <from>openjdk:8-jre-slim</from>
-                <optimise>false</optimise>
-                <assembly>
-                  <targetDir>/</targetDir>
-                  <inline>
-                    <fileSets>
-                      <fileSet>
-                        <directory>target/dependency/lib</directory>
-                        <outputDirectory>/opt/nuvla/server/lib</outputDirectory>
-                        <includes>
-                          <include>*.jar</include>
-                        </includes>
-                      </fileSet>
-                    </fileSets>
-                    <files>
-                      <file>
-                        <source>src/scripts/start.sh</source>
-                        <outputDirectory>/opt/nuvla/server/bin</outputDirectory>
-                      </file>
-                      <file>
-                        <source>src/scripts/log4j.properties</source>
-                        <outputDirectory>/opt/nuvla/server/resources</outputDirectory>
-                      </file>
-                    </files>
-                  </inline>
-                </assembly>
-                <runCmds>
-                  <runCmd>/usr/sbin/groupadd -r nuvla</runCmd>
-                  <runCmd>/usr/sbin/useradd -r -d /opt/nuvla/server -g nuvla nuvla</runCmd>
-                  <runCmd>mkdir -p /opt/nuvla/server/lib.d/example</runCmd>
-                  <runCmd>chmod 0755 /opt/nuvla/server/bin/start.sh</runCmd>
-                </runCmds>
-                <env>
-                  <NUVLA_SERVER_INIT>sixsq.nuvla.server.example/init</NUVLA_SERVER_INIT>
-                </env>
-                <ports>
-                  <port>8200</port>
-                </ports>
-                <tags>
-                  <tag>${project.version}</tag>
-                </tags>
-                <workdir>/opt/nuvla/server</workdir>
-                <cmd>/opt/nuvla/server/bin/start.sh</cmd>
-              </build>
-            </image>
-          </images>
-        </configuration>
-
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>1.4.10</version>
         <executions>
           <execution>
-            <id>docker-build</id>
-            <phase>package</phase>
+            <id>default</id>
             <goals>
               <goal>build</goal>
+              <goal>push</goal>
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <repository>docker.io/nuvla/ui</repository>
+          <tag>${project.version}</tag>
+          <build>
+            <squash>true</squash>
+          </build>
+          <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+        </configuration>
       </plugin>
 
     </plugins>
