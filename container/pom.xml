@@ -76,7 +76,7 @@
           </execution>
         </executions>
         <configuration>
-          <repository>docker.io/nuvla/ui</repository>
+          <repository>docker.io/nuvla/ring</repository>
           <tag>${project.version}</tag>
           <build>
             <squash>true</squash>
