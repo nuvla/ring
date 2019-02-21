@@ -41,6 +41,29 @@
     <plugins>
 
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <!-- sets the only.when.is.snapshot.used property to true
+                 if SNAPSHOT was used, to the project version otherwise -->
+            <id>set docker tag property</id>
+            <goals>
+              <goal>regex-property</goal>
+            </goals>
+            <configuration>
+              <name>docker-tag</name>
+              <value>${project.version}</value>
+              <regex>^.*SNAPSHOT$</regex>
+              <replacement>test</replacement>
+              <failIfNoMatch>false</failIfNoMatch>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <executions>
@@ -77,7 +100,7 @@
         </executions>
         <configuration>
           <repository>docker.io/nuvla/ring</repository>
-          <tag>${project.version}</tag>
+          <tag>${docker-tag}</tag>
           <build>
             <squash>true</squash>
           </build>
