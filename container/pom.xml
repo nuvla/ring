@@ -169,11 +169,12 @@
           <tag>${docker-tag}</tag>
           <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
           <buildArgs>
-            <GIT_BRANCH>${git.branch}</GIT_BRANCH>
+            <GIT_BRANCH>${git.branch.selected}</GIT_BRANCH>
             <GIT_COMMIT_ID>${git.commit.id}</GIT_COMMIT_ID>
             <GIT_DIRTY>${git.dirty}</GIT_DIRTY>
             <GIT_BUILD_TIME>${git.build.time}</GIT_BUILD_TIME>
-            <GIT_BUILD_NUMBER_UNIQUE>${git.build.number.unique}</GIT_BUILD_NUMBER_UNIQUE>
+            <TRAVIS_BUILD_NUMBER>${env.TRAVIS_BUILD_NUMBER}</TRAVIS_BUILD_NUMBER>
+            <TRAVIS_BUILD_WEB_URL>${env.TRAVIS_BUILD_WEB_URL}</TRAVIS_BUILD_WEB_URL>
           </buildArgs>
         </configuration>
       </plugin>
