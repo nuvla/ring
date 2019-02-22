@@ -75,13 +75,26 @@
         <version>3.0.0</version>
         <executions>
           <execution>
+            <id>recover true branch name</id>
+            <goals>
+              <goal>regex-property</goal>
+            </goals>
+            <configuration>
+              <name>git.branch.selected</name>
+              <value>${env.TRAVIS_PULL_REQUEST_BRANCH}%${env.TRAVIS_BRANCH}%${git.branch}</value>
+              <regex>^%*([^%]+).*$</regex>
+              <replacement>$1</replacement>
+              <failIfNoMatch>false</failIfNoMatch>
+            </configuration>
+          </execution>
+          <execution>
             <id>convert branch name to valid docker repository name</id>
             <goals>
               <goal>regex-property</goal>
             </goals>
             <configuration>
               <name>git.branch.sanitized</name>
-              <value>${git.branch}</value>
+              <value>${git.branch.selected}</value>
               <regex>[^a-z0-9\._-]</regex>
               <replacement>-</replacement>
               <failIfNoMatch>false</failIfNoMatch>
