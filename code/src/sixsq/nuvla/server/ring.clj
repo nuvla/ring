@@ -196,12 +196,18 @@
    NUVLA_SERVER_INIT defined. NUVLA_SERVER_PORT and NUVLA_SERVER_PORT may be
    defined."
   [& _]
-  (let [[server-init server-port server-host] (server-cfg)
-        shutdown-fn (start server-init server-port server-host)]
-    (register-shutdown-hook shutdown-fn))
+  (try
+    (let [[server-init server-port server-host] (server-cfg)
+          shutdown-fn (start server-init server-port server-host)]
+      (register-shutdown-hook shutdown-fn))
 
-  ;; The server (started as a daemon thread) will exit immediately
-  ;; if the main thread is allowed to terminate.  To avoid this,
-  ;; indefinitely block this thread.  Stopping the service can only
-  ;; be done externally through a SIGTERM signal.
-  @(promise))
+    ;; The server (started as a daemon thread) will exit immediately
+    ;; if the main thread is allowed to terminate.  To avoid this,
+    ;; indefinitely block this thread.  Stopping the service can only
+    ;; be done externally through a SIGTERM signal.
+    @(promise)
+
+    (catch Exception e
+      (log/error "uncaught exception in main: " (.getMessage e))
+      (log/error "forcing JVM exit...")
+      (System/exit 1))))
