@@ -28,12 +28,15 @@
   :aot [sixsq.nuvla.server.ring]
 
   :dependencies
-  [[org.clojure/clojure]
-   [org.clojure/tools.logging]
-   [aleph]
+  [[aleph]
+   [clj-time]
    [environ]
    [log4j]
-   [org.slf4j/slf4j-log4j12]]
+   [org.clojure/clojure]
+   [org.clojure/tools.logging]
+   [org.slf4j/slf4j-api]
+   [org.slf4j/slf4j-log4j12]
+   [ring/ring-core]]
 
   :profiles
   {:test     {:source-paths   ["test"]
