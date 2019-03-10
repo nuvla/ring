@@ -29,14 +29,15 @@
 
   :dependencies
   [[aleph]
-   [clj-time]
+   [clj-time]                                               ;; added to force version
    [environ]
    [log4j]
    [org.clojure/clojure]
    [org.clojure/tools.logging]
    [org.slf4j/slf4j-api]
    [org.slf4j/slf4j-log4j12]
-   [ring/ring-core]]
+   [ring/ring-core]                                         ;; added to force version
+   ]
 
   :profiles
   {:test     {:source-paths   ["test"]
