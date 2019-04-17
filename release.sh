@@ -86,7 +86,7 @@ update_project_versions() {
         exit 1
     fi
     echo 'Updating project.clj versions to ' ${v}
-    find . -name project.clj -exec sed SED_OPTS "s/^(defproject sixsq.nuvla.ring/code .*/(defproject sixsq.nuvla.ring/code \"${v}\")/" {} \;
+    find . -name project.clj -exec sed ${SED_OPTS} "s/^(defproject sixsq.nuvla.ring/code .*/(defproject sixsq.nuvla.ring/code \"${v}\")/" {} \;
 }
 
 
