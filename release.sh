@@ -14,12 +14,6 @@ else
     TARGET=install
 fi
 
-if [ `uname` == 'Darwin' ]; then
-    SED_OPTS="-i ''"
-else
-    SED_OPTS="-i"
-fi
-
 do_push() {
     if [ "${PUSH_CHANGES}" == "true" ]; then
         echo "INFO: PUSHING changes."
