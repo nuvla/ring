@@ -1,12 +1,12 @@
 #!/bin/bash -x
 
-TAG=NONE
+TAG_VERSION=NONE
 
 VERSION=NONE
 
-BRANCH=${1:-master}
+PUSH_CHANGES=${1:-false}
 
-PUSH_CHANGES=${2:-false}
+BRANCH=master
 
 if [ "${PUSH_CHANGES}" == "true" ]; then
     TARGET=deploy
@@ -31,24 +31,18 @@ do_push() {
 
 do_push_tag() {
     if [ "${PUSH_CHANGES}" == "true" ]; then
-        echo "INFO: PUSHING tag ${TAG}."
-        git push origin ${TAG}
+        echo "INFO: PUSHING tag ${TAG_VERSION}."
+        git push origin ${TAG_VERSION}
     else
         echo "INFO: not pushing tag."
     fi
-}
-
-# set the tag
-set_tag() {
-  TAG="${TAG_VERSION}"
-  export TAG
 }
 
 # update pom.xml files for tag and next development version
 tag_release() {
 
   # make the release tag
-  (git add . ; git commit -m "release ${TAG}"; do_push; git tag ${TAG}; do_push_tag)
+  (git add . ; git commit -m "release ${TAG_VERSION}"; do_push; git tag ${TAG_VERSION}; do_push_tag)
 
 }
 
@@ -60,18 +54,13 @@ update_to_snapshot() {
 }
 
 do_tag() {
-    set_tag
-    echo "TAG = ${TAG}"
-    echo "VERSION = ${TAG_VERSION}"
-    echo "TAGGING"
+    echo "TAGGING ${TAG_VERSION}"
     tag_release
     echo
 }
 
 do_update() {
-    echo "SNAPSHOT = ${NEXT_RELEASE}"
-
-    echo "UPDATING: ${repo}"
+    echo "UPDATING TO SNAPSHOT ${NEXT_RELEASE}"
     update_to_snapshot
     echo
 }
@@ -97,7 +86,7 @@ update_project_versions() {
         exit 1
     fi
     echo 'Updating project.clj versions to ' ${v}
-    find . -name project.clj -exec sed SED_OPTS "s/^(defproject sixsq.nuvla.ring/code .*/(defproject sixsq.nuvla.ring/code "${v}\")/" {} \;
+    find . -name project.clj -exec sed SED_OPTS "s/^(defproject sixsq.nuvla.ring/code .*/(defproject sixsq.nuvla.ring/code \"${v}\")/" {} \;
 }
 
 
