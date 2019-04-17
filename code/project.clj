@@ -1,6 +1,6 @@
-(def +version+ "0.0.1-SNAPSHOT")
+(def parent-version "6.3.0-SNAPSHOT")
 
-(defproject sixsq.nuvla.ring/code "0.0.1-SNAPSHOT"
+(defproject sixsq.nuvla.ring/code "0.9.0-SNAPSHOT"
 
   :description "simple ring container for micro-services"
 
@@ -12,7 +12,7 @@
 
   :plugins [[lein-parent "0.3.5"]]
 
-  :parent-project {:coords  [sixsq.nuvla/parent "6.2.0"]
+  :parent-project {:coords  [sixsq.nuvla/parent ~parent-version]
                    :inherit [:plugins
                              :min-lein-version
                              :managed-dependencies
