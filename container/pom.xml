@@ -5,14 +5,14 @@
 
   <artifactId>container-dep</artifactId>
   <packaging>pom</packaging>
-  <version>0.9.0-SNAPSHOT</version>
+  <version>0.9.0</version>
   <name>ring/container</name>
   <url>http://sixsq.com</url>
 
   <parent>
     <groupId>sixsq.nuvla.ring</groupId>
     <artifactId>parent</artifactId>
-    <version>0.9.0-SNAPSHOT</version>
+    <version>0.9.0</version>
   </parent>
 
   <licenses>
