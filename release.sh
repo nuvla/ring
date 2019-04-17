@@ -15,9 +15,9 @@ else
 fi
 
 if [ `uname` == 'Darwin' ]; then
-    SED_OPTS = "-i ''"
+    SED_OPTS="-i ''"
 else
-    SED_OPTS = "-i"
+    SED_OPTS="-i"
 fi
 
 do_push() {
