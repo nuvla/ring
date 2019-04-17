@@ -9,8 +9,10 @@ files in the subdirectories for more information.
 
 ## Artifacts
 
- - `nuvla/ring:<version>` - A Docker container for simple, ring-based
-   web applications. Available from Docker Hub.
+ - `nuvla/ring` - A Docker container for simple, ring-based web
+   applications. Available from the [nuvla/ring
+   repository](https://cloud.docker.com/u/nuvla/repository/docker/nuvla/ring)
+   on Docker Hub.
 
 ## Release Process
 
