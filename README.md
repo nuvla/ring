@@ -14,6 +14,12 @@ files in the subdirectories for more information.
    repository](https://cloud.docker.com/u/nuvla/repository/docker/nuvla/ring)
    on Docker Hub.
 
+ - `sixsq.nuvla.ring/code` jar file: Jar file containing the ring
+   server code.  Available from the release maven repository
+   maintained in AWS S3.  See the `project.clj` file in the
+   nuvla/parent repository for the URL.
+
+
 ## Release Process
 
 **Before** creating the release:
