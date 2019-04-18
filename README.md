@@ -11,7 +11,7 @@ files in the subdirectories for more information.
 
  - `nuvla/ring` - A Docker container for simple, ring-based web
    applications. Available from the [nuvla/ring
-   repository](https://cloud.docker.com/u/nuvla/repository/docker/nuvla/ring)
+   repository](https://hub.docker.com/r/nuvla/ring)
    on Docker Hub.
 
  - `sixsq.nuvla.ring/code` jar file: Jar file containing the ring
