@@ -9,6 +9,7 @@ Initial, functionally-complete release.
 ### Changed 
 
   - Update parent version to 6.5.0
+  - Remove unused clj-time dependency
 
 ## [0.9.0] - 2019-04-17
 

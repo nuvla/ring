@@ -29,7 +29,6 @@
 
   :dependencies
   [[aleph]
-   [clj-time]                                               ;; added to force version
    [environ]
    [log4j]
    [org.clojure/clojure]
