@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+  - For dynamic resolution of vars use clojure's new 
+    requiring-resolve function, which is only available in
+    clojure 1.10 and later.
 
 ## [2.0.2] - 2019-07-30
 
