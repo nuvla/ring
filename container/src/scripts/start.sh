@@ -28,7 +28,7 @@ done
 # Actually start the server. This will start in daemon
 # mode and (normally) will not exit.
 #
-cmd="/usr/bin/java -cp ${CP} sixsq.nuvla.server.ring"
+cmd="java -cp ${CP} sixsq.nuvla.server.ring"
 echo $cmd
 $cmd
 

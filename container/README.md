@@ -7,8 +7,9 @@ can be reused for the collection of micro-services that make up the
 Nuvla platform.
 
 When running the build of this repository, it will create a Docker
-container called `nuvla/ring-container`, which contains an example
-ring handler.
+container, which contains an example ring handler.  The name of the
+container will be `nuvla/ring:version` when building a release version
+and `nuvladev/ring:branch-name` when building a snapshot.
 
 Running Example
 ---------------
@@ -16,7 +17,7 @@ Running Example
 To run this, do the following:
 
 ```sh
-docker run -p 8200:8200 nuvla/ring-container
+docker run -p 8200:8200 -d nuvla/ring
 ```
 
 The example service will be available on
