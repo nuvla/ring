@@ -16,22 +16,6 @@
     (is (thrown-with-msg? ExceptionInfo #"invalid symbol" (as-symbol nil)))))
 
 
-(deftest check-ns-and-var
-  (let [ns-and-var @#'t/ns-and-var]
-    (are [expected input] (= expected (ns-and-var input))
-                          '[environ.core env] 'environ.core/env)
-    (is (thrown-with-msg? ExceptionInfo #"complete, namespaced" (ns-and-var 'no-namespace)))))
-
-
-(deftest check-resolve-var
-  (let [resolve-var @#'t/resolve-var]
-    (are [input] (apply resolve-var input)
-                 '[environ.core env]
-                 '[aleph.http start-server])
-    (is (nil? (apply resolve-var '[environ.core unknown])))
-    (is (thrown-with-msg? ExceptionInfo #"could not resolve" (apply resolve-var '[unknown unknown])))))
-
-
 (deftest check-dyn-resolve
   (let [dyn-resolve @#'t/dyn-resolve]
     (are [input] (dyn-resolve input)
@@ -39,9 +23,9 @@
                  "environ.core/env"
                  'aleph.http/start-server
                  "aleph.http/start-server")
-    (is (thrown-with-msg? ExceptionInfo #"complete, namespaced" (dyn-resolve 'invalid.symbol)))
-    (is (thrown-with-msg? ExceptionInfo #"error requiring namespace" (dyn-resolve 'unknown/var)))
-    (is (thrown-with-msg? ExceptionInfo #"error requiring namespace" (dyn-resolve "unknown/var")))))
+    (is (thrown-with-msg? ExceptionInfo #"(?s:symbol.*could not be resolved.*Not a qualified symbol.*)" (dyn-resolve 'invalid.symbol)))
+    (is (thrown-with-msg? ExceptionInfo #"(?s:symbol.*could not be resolved.*Could not locate.*)" (dyn-resolve 'unknown/var)))
+    (is (thrown-with-msg? ExceptionInfo #"(?s:symbol.*could not be resolved.*Could not locate.*)" (dyn-resolve "unknown/var")))))
 
 
 (deftest check-validate-host

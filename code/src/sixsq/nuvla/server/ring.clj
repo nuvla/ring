@@ -38,39 +38,16 @@
       (log-and-throw (str "invalid symbol: " s) e))))
 
 
-(defn- ns-and-var
-  "Provides the namespace and name of the symbol as symbols. If either is nil,
-   then an exception is thrown."
-  [s]
-  (let [result ((juxt namespace name) s)]
-    (if (some nil? result)
-      (log-and-throw (str "symbol (" s ") must be a complete, namespaced value"))
-      (map symbol result))))
-
-
-(defn- resolve-var
-  "Resolves the var in the given namespace or throws a descriptive exception."
-  [ns f]
-  (try
-    (ns-resolve (find-ns ns) f)
-    (catch Exception e
-      (log-and-throw (str "could not resolve " f " in namespace " ns) e))))
-
-
 (defn- dyn-resolve
   "Dynamically requires the namespace of the given symbol and then resolves
    the name of the symbol in this namespace. Returns the var for the resolved
    symbol. Throws an exception if the symbol could not be resolved."
   [s]
-  (let [[ns f] (ns-and-var (as-symbol s))]
+  (let [sym (as-symbol s)]
     (try
-      (require ns)
+      (requiring-resolve sym)
       (catch Exception e
-        (log-and-throw (str "error requiring namespace (" ns "): " (.getMessage e)))))
-
-    (if-let [result (resolve-var ns f)]
-      result
-      (log-and-throw (str "symbol (" s ") was not found")))))
+        (log-and-throw (str "symbol (" s ") could not be resolved") e)))))
 
 
 (defn- hook
