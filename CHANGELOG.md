@@ -4,6 +4,7 @@
 
 ### Changed
 
+  - Fix java path for example application so that it works.
   - For dynamic resolution of vars use clojure's new 
     requiring-resolve function, which is only available in
     clojure 1.10 and later.
