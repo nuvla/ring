@@ -22,6 +22,10 @@ RUN /usr/sbin/groupadd -r nuvla
 RUN /usr/sbin/useradd -r -d /opt/nuvla/server -g nuvla nuvla
 RUN mkdir -p /opt/nuvla/server/lib.d/example
 RUN chmod 0755 /opt/nuvla/server/bin/start.sh
+RUN apt-get update && \
+    apt-get install -y curl && \
+    apt autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
 
 ENV NUVLA_SERVER_INIT=sixsq.nuvla.server.example/init
 
