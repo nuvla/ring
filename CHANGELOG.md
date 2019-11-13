@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## [2.0.3] - 2019-11-13
+
 ### Changed
 
   - Fix java path for example application so that it works.
