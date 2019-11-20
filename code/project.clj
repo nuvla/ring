@@ -1,6 +1,6 @@
 (def parent-version "6.7.0")
 
-(defproject sixsq.nuvla.ring/code "2.0.4"
+(defproject sixsq.nuvla.ring/code "2.0.5-SNAPSHOT"
 
   :description "simple ring container for micro-services"
 
