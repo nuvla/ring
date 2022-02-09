@@ -27,8 +27,6 @@
 
   :aot [sixsq.nuvla.server.ring]
 
-  :jvm-opts ["--add-modules" "java.xml.bind"]
-  
   :dependencies
   [[aleph]
    [environ]
