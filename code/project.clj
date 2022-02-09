@@ -36,6 +36,7 @@
    [org.slf4j/slf4j-api]
    [org.slf4j/slf4j-log4j12]
    [ring/ring-core]                                         ;; added to force version
+   [com.cemerick/url]
    ]
 
   :profiles
