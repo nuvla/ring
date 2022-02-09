@@ -34,7 +34,7 @@ jobs:
 
       - name: Run Sonar Scanner
         env:
-          # to get access to secrets.SONAR_TOKEN_TEST, provide GITHUB_TOKEN
+          # provide GITHUB_TOKEN to get access to secrets.SONAR_TOKEN_TEST
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: code
         run: sonar-scanner

@@ -16,7 +16,7 @@
             [lein-cloverage "1.2.2"]
             [lein-kibit "0.1.8"]
             [com.github.clj-kondo/lein-clj-kondo "0.1.3"]
-            [lein-nvd "2.0.0"]]
+            [lein-nvd "1.9.0"]]
 
   :parent-project {:coords  [sixsq.nuvla/parent ~parent-version]
                    :inherit [:plugins

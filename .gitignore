@@ -43,3 +43,5 @@ pom.xml.asc
 .nrepl-history
 .DS_Store
 
+.scannerwork/
+.eastwood
