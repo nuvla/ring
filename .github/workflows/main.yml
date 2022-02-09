@@ -24,6 +24,17 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
 
+      - uses: s4u/maven-settings-action@v2.2.0
+        with:
+          githubServer: false
+          override: true
+          servers: |
+            [{
+                "id": "docker.io",
+                "username": "${{ secrets.SIXSQ_DOCKER_USERNAME }}",
+                "password": "${{ secrets.SIXSQ_DOCKER_PASSWORD }}"
+            }]
+
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF##*/})"
@@ -36,7 +47,9 @@ jobs:
           TRAVIS_BUILD_NUMBER: ${{ github.run_id }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: mvn install
+          SIXSQ_DOCKER_USERNAME: ${{ secrets.SIXSQ_DOCKER_USERNAME }}
+          SIXSQ_DOCKER_PASSWORD: ${{ secrets.SIXSQ_DOCKER_PASSWORD }}
+        run: mvn deploy
 
 #  job-notify:
 #    if: always()
