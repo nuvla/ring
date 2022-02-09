@@ -10,7 +10,13 @@
             :url "http://www.apache.org/licenses/LICENSE-2.0.txt"
             :distribution :repo}
 
-  :plugins [[lein-parent "0.3.5"]]
+  :plugins [[lein-parent "0.3.5"]
+            [lein-ancient "1.0.0-RC3"]
+            [jonase/eastwood "1.2.2"]
+            [lein-cloverage "1.2.2"]
+            [lein-kibit "0.1.8"]
+            [com.github.clj-kondo/lein-clj-kondo "0.1.3"]
+            [lein-nvd "2.0.0"]]
 
   :parent-project {:coords  [sixsq.nuvla/parent ~parent-version]
                    :inherit [:plugins
@@ -36,7 +42,7 @@
    [org.slf4j/slf4j-api]
    [org.slf4j/slf4j-log4j12]
    [ring/ring-core]                                         ;; added to force version
-   [javax.xml.bind/jaxb-api "2.4.0-b180830.0359"]
+   [clj-kondo "RELEASE"]
    ]
 
   :profiles
