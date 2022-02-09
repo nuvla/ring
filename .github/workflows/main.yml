@@ -40,14 +40,6 @@ jobs:
         run: sonar-scanner
                -Dsonar.login=${{ secrets.SONAR_TOKEN_TEST }}
 
-      - name: check sonar scanne report
-        run: cat code/.scannerwork/report-task.txt
-
-      - name: manual quality gate check
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_TEST }}
-        run: ./check-quality-gate.sh code/.scannerwork/report-task.txt
-
       - name: SonarQube Quality Gate check
         uses: sonarsource/sonarqube-quality-gate-action@v1.0.0
         # Force to fail step after specific time
