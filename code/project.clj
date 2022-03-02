@@ -10,8 +10,7 @@
             :url "http://www.apache.org/licenses/LICENSE-2.0.txt"
             :distribution :repo}
 
-  :plugins [[lein-parent "0.3.5"]
-            [org.clojars.oliyh/lein-test-out "0.3.2"]]
+  :plugins [[lein-parent "0.3.5"]]
 
   :parent-project {:coords  [sixsq.nuvla/parent ~parent-version]
                    :inherit [:plugins
@@ -27,7 +26,6 @@
   :pom-location "target/"
 
   :aot [sixsq.nuvla.server.ring]
-  :aliases {"junit" ["with-profile" "test" "do" "test-out" "junit" "junit.xml"]}
 
   :dependencies
   [[aleph]
@@ -42,5 +40,6 @@
 
   :profiles
   {:test     {:source-paths   ["test"]
-              :resource-paths ["test-resources"]}
+              :resource-paths ["test-resources"]
+              :plugins [[lein-test-report-junit-xml "0.2.0"]]}
    :dev {:dependencies [[clj-kondo "RELEASE"]]}})
