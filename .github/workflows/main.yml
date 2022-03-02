@@ -83,6 +83,11 @@ jobs:
           SIXSQ_DOCKER_PASSWORD: ${{ secrets.SIXSQ_DOCKER_PASSWORD }}
         run: mvn deploy
 
+      - name: See test results
+        run: |
+          ls -l code/target/test-reports/TEST-*.xml
+          cat code/target/test-reports/TEST-*.xml
+
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
