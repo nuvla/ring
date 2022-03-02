@@ -41,5 +41,6 @@
   :profiles
   {:test     {:source-paths   ["test"]
               :resource-paths ["test-resources"]
-              :plugins [[lein-test-report-junit-xml "0.2.0"]]}
+              :plugins [[lein-test-report-junit-xml "0.2.0"]]
+              :test-report-junit-xml {:output-dir "test-reports"}}
    :dev {:dependencies [[clj-kondo "RELEASE"]]}})

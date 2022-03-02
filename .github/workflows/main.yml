@@ -84,15 +84,16 @@ jobs:
         run: mvn deploy
 
       - name: See test results
+        if: always()
         run: |
-          ls -l code/target/test-reports/TEST-*.xml
-          cat code/target/test-reports/TEST-*.xml
+          ls -l code/test-reports/TEST-*.xml
+          cat code/test-reports/TEST-*.xml
 
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: code/target/test-reports/TEST-*.xml
+          files: code/test-reports/TEST-*.xml
 
   job-notify:
     if: always()
