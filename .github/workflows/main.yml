@@ -78,6 +78,12 @@ jobs:
           SIXSQ_DOCKER_PASSWORD: ${{ secrets.SIXSQ_DOCKER_PASSWORD }}
         run: mvn deploy
 
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        if: always()
+        with:
+          files: code/junit.xml
+
   job-notify:
     if: always()
     name: Post Workflow Status To Slack

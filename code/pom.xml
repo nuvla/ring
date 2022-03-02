@@ -47,7 +47,7 @@
                 <configuration>
                   <executable>lein</executable>
                   <arguments>
-                    <argument>test</argument>
+                    <argument>junit</argument>
                   </arguments>
                 </configuration>
               </execution>
