@@ -39,25 +39,25 @@
 
   <profiles>
     <profile>
-      <id>default TRAVIS_BRANCH value</id>
+      <id>default CI_BRANCH value</id>
       <activation>
         <property>
-          <name>!env.TRAVIS_BRANCH</name>
+          <name>!env.CI_BRANCH</name>
         </property>
       </activation>
       <properties>
-        <env.TRAVIS_BRANCH></env.TRAVIS_BRANCH>
+        <env.CI_BRANCH></env.CI_BRANCH>
       </properties>
     </profile>
     <profile>
-      <id>default TRAVIS_PULL_REQUEST_BRANCH value</id>
+      <id>default CI_PULL_REQUEST_BRANCH value</id>
       <activation>
         <property>
-          <name>!env.TRAVIS_PULL_REQUEST_BRANCH</name>
+          <name>!env.CI_PULL_REQUEST_BRANCH</name>
         </property>
       </activation>
       <properties>
-        <env.TRAVIS_PULL_REQUEST_BRANCH></env.TRAVIS_PULL_REQUEST_BRANCH>
+        <env.CI_PULL_REQUEST_BRANCH></env.CI_PULL_REQUEST_BRANCH>
       </properties>
     </profile>
   </profiles>
@@ -68,7 +68,7 @@
       <plugin>
         <groupId>pl.project13.maven</groupId>
         <artifactId>git-commit-id-plugin</artifactId>
-        <version>2.2.6</version>
+        <version>3.0.0</version>
         <executions>
           <execution>
             <id>git-information</id>
@@ -106,7 +106,7 @@
             </goals>
             <configuration>
               <name>git.branch.selected</name>
-              <value>${env.TRAVIS_PULL_REQUEST_BRANCH}%${env.TRAVIS_BRANCH}%${git.branch}</value>
+              <value>${env.CI_PULL_REQUEST_BRANCH}%${env.CI_BRANCH}%${git.branch}</value>
               <regex>^%*([^%]+).*$</regex>
               <replacement>$1</replacement>
               <failIfNoMatch>false</failIfNoMatch>
@@ -198,8 +198,8 @@
             <GIT_COMMIT_ID>${git.commit.id}</GIT_COMMIT_ID>
             <GIT_DIRTY>${git.dirty}</GIT_DIRTY>
             <GIT_BUILD_TIME>${git.build.time}</GIT_BUILD_TIME>
-            <TRAVIS_BUILD_NUMBER>${env.TRAVIS_BUILD_NUMBER}</TRAVIS_BUILD_NUMBER>
-            <TRAVIS_BUILD_WEB_URL>${env.TRAVIS_BUILD_WEB_URL}</TRAVIS_BUILD_WEB_URL>
+            <CI_BUILD_NUMBER>${env.CI_BUILD_NUMBER}</CI_BUILD_NUMBER>
+            <CI_BUILD_WEB_URL>${env.CI_BUILD_WEB_URL}</CI_BUILD_WEB_URL>
           </buildArgs>
         </configuration>
       </plugin>

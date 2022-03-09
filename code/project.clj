@@ -1,4 +1,4 @@
-(def parent-version "6.7.0")
+(def parent-version "6.7.6")
 
 (defproject sixsq.nuvla.ring/code "2.0.5-SNAPSHOT"
 
@@ -40,4 +40,7 @@
 
   :profiles
   {:test     {:source-paths   ["test"]
-              :resource-paths ["test-resources"]}})
+              :resource-paths ["test-resources"]
+              :plugins [[lein-test-report-junit-xml "0.2.0"]]
+              :test-report-junit-xml {:output-dir "test-reports"}}
+   :dev {:dependencies [[clj-kondo "RELEASE"]]}})
