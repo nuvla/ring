@@ -45,6 +45,7 @@ jobs:
         run: sonar-scanner
                -Dsonar.login=${{ secrets.SONAR_TOKEN }}
                -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+               -X
 
       - name: debug
         run: |
