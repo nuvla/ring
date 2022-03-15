@@ -46,6 +46,14 @@ jobs:
                -Dsonar.login=${{ secrets.SONAR_TOKEN }}
                -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
 
+      - name: debug
+        run: |
+          echo ---------
+          cat code/.scannerwork/report-task.txt || true
+          echo ---------
+          cat code/test-reports/sonar/testExecutions.xml || true
+          echo ---------
+
       - name: Get list of tests
         if: always()
         id: tests
