@@ -59,7 +59,7 @@ jobs:
         id: tests
         uses: Rishabh510/Path-lister-action@master
         with:
-          path: "code/test-reports"
+          path: "code/test-reports/xml"
           type: ".xml"
 
       - name: Fail on failed tests
@@ -124,7 +124,7 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: code/test-reports/TEST-*.xml
+          files: code/test-reports/xml/TEST-*.xml
 
   job-notify:
     if: always()
