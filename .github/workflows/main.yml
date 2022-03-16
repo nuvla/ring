@@ -33,6 +33,7 @@ jobs:
           java-version: '11'
 
       - name: Project version
+        working-directory: code
         run: |
           VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
           echo "::set-output name=version::$VERSION"
@@ -51,7 +52,7 @@ jobs:
         run: sonar-scanner
                -Dsonar.login=${{ secrets.SONAR_TOKEN }}
                -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
-               -Dsonar.projectVersion=${{ steps.project_version.version }}
+               -Dsonar.projectVersion=${{ steps.project_version.outputs.version }}
                -X
 
       - name: debug
