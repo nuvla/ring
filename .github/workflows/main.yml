@@ -55,35 +55,35 @@ jobs:
           cat code/test-reports/sonar/testExecutions.xml || true
           echo ---------
 
-      - name: Get list of tests
-        if: always()
-        id: tests
-        uses: Rishabh510/Path-lister-action@master
-        with:
-          path: "code/test-reports/xml"
-          type: ".xml"
-
-      - name: Fail on failed tests
-        if: always()
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libxml2-utils --fix-missing
-          echo "Found ${{ steps.tests.outputs.path_count }} test report(s)"
-          if [[ ${{ steps.tests.outputs.path_count }} < 1 ]]; then
-             echo "ERROR: No unit test reports collected."
-             exit 1
-          fi
-          for f in ${{ steps.tests.outputs.paths }}; do
-            echo "=== $f ==="
-            if [[ $(xmllint --xpath "string(//testsuite/@failures)" $f) > 1 ]]; then
-               echo TEST FAILED: $f
-               exit 1
-            fi
-            if [[ $(xmllint --xpath "string(//testsuite/@errors)" $f) > 1 ]]; then
-               echo TEST ERRORED: $f
-               exit 1
-            fi
-          done
+#      - name: Get list of tests
+#        if: always()
+#        id: tests
+#        uses: Rishabh510/Path-lister-action@master
+#        with:
+#          path: "code/test-reports/xml"
+#          type: ".xml"
+#
+#      - name: Fail on failed tests
+#        if: always()
+#        run: |
+#          sudo apt-get update
+#          sudo apt-get install -y libxml2-utils --fix-missing
+#          echo "Found ${{ steps.tests.outputs.path_count }} test report(s)"
+#          if [[ ${{ steps.tests.outputs.path_count }} < 1 ]]; then
+#             echo "ERROR: No unit test reports collected."
+#             exit 1
+#          fi
+#          for f in ${{ steps.tests.outputs.paths }}; do
+#            echo "=== $f ==="
+#            if [[ $(xmllint --xpath "string(//testsuite/@failures)" $f) > 1 ]]; then
+#               echo TEST FAILED: $f
+#               exit 1
+#            fi
+#            if [[ $(xmllint --xpath "string(//testsuite/@errors)" $f) > 1 ]]; then
+#               echo TEST ERRORED: $f
+#               exit 1
+#            fi
+#          done
 
       - name: SonarQube Quality Gate check
         uses: sonarsource/sonarqube-quality-gate-action@v1.0.0
