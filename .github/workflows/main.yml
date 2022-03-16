@@ -32,6 +32,12 @@ jobs:
           distribution: 'zulu'
           java-version: '11'
 
+      - name: Project version
+        run: |
+          VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
+          echo "::set-output name=version::$VERSION"
+        id: project_version
+
       - name: Setup Sonar Scanner
         uses: warchant/setup-sonar-scanner@v3
         with:
@@ -45,6 +51,7 @@ jobs:
         run: sonar-scanner
                -Dsonar.login=${{ secrets.SONAR_TOKEN }}
                -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+               -Dsonar.projectVersion=${{ steps.project_version.version }}
                -X
 
       - name: debug
