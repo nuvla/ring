@@ -4,7 +4,7 @@
     [sixsq.nuvla.server.error :as e]))
 
 (deftest test-sum-failure
-  (is (= 4 (e/sum 1 1))))
+  (is (= 3 (e/sum 1 1))))
 
 (deftest test-sum
   (is (= 2 (e/sum 1 1))))
