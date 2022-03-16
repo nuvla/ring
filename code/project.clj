@@ -41,6 +41,7 @@
   :profiles
   {:test     {:source-paths   ["test"]
               :resource-paths ["test-resources"]
-              :plugins [[lein-test-report-junit-xml "0.2.0"]]
-              :test-report-junit-xml {:output-dir "test-reports"}}
+              :plugins [[org.clojars.konstan/lein-test-report-sonar "0.0.4"]]
+              :test-report-sonar {:output-dir "test-reports"
+                                  :emit-junit-xml true}}
    :dev {:dependencies [[clj-kondo "RELEASE"]]}})
