@@ -10,7 +10,8 @@
             :url "http://www.apache.org/licenses/LICENSE-2.0.txt"
             :distribution :repo}
 
-  :plugins [[lein-parent "0.3.5"]]
+  :plugins [[lein-parent "0.3.5"]
+            [lein-project-version "0.1.0"]]
 
   :parent-project {:coords  [sixsq.nuvla/parent ~parent-version]
                    :inherit [:plugins

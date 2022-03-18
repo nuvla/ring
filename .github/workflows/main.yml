@@ -35,7 +35,7 @@ jobs:
       - name: Project version
         working-directory: code
         run: |
-          VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )
+          VERSION=$( lein project-version )
           echo "::set-output name=version::$VERSION"
         id: project_version
 
