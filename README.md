@@ -1,6 +1,6 @@
 # Nuvla Ring Container
 
-[![Build Status](https://travis-ci.com/nuvla/ring.svg?branch=master)](https://travis-ci.com/nuvla/ring)
+[![Build Status](https://github.com/nuvla/ring/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/nuvla/ring/actions/workflows/main.yml)
 
 This repository contains the code and configuration to create a
 simple, ring-based Docker container for web applications.  Build from
@@ -79,7 +79,7 @@ formatting standardized.
 
 ## Copyright
 
-Copyright &copy; 2019-2021, SixSq SA
+Copyright &copy; 2019-2022, SixSq SA
 
 ## License
 
