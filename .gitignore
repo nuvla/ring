@@ -45,3 +45,4 @@ pom.xml.asc
 
 .scannerwork/
 .eastwood
+code/test-reports/

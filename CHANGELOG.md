@@ -2,48 +2,53 @@
 
 ## Unreleased
 
+## [2.0.6] - 2022-03-29
+
+### Changed
+
+- Update to parent version 6.7.8
+
 ## [2.0.5] - 2022-03-29
 
 ### Changed
 
-  - Update to parent version 6.7.7
+- Update to parent version 6.7.7
 
 ## [2.0.4] - 2019-11-13
 
 ### Changed
 
-  - Update to parent version 6.7.0.
+- Update to parent version 6.7.0.
 
 ## [2.0.3] - 2019-11-13
 
 ### Changed
 
-  - Fix java path for example application so that it works.
-  - For dynamic resolution of vars use clojure's new 
-    requiring-resolve function, which is only available in
-    clojure 1.10 and later.
-  - Add curl to docker image to allow healthcheck: when application starts.
+- Fix java path for example application so that it works.
+- For dynamic resolution of vars use clojure's new requiring-resolve function,
+  which is only available in clojure 1.10 and later.
+- Add curl to docker image to allow healthcheck: when application starts.
 
 ## [2.0.2] - 2019-07-30
 
 ### Changed
 
-  - Update to parent version 6.6.0
+- Update to parent version 6.6.0
 
 ## [2.0.1] - 2019-06-28
 
 ### Changed
 
-  - Update to parent version 6.5.1 with minor dependency changes
+- Update to parent version 6.5.1 with minor dependency changes
 
 ## [2.0.0] - 2019-04-29
 
 Initial, functionally-complete release.
 
-### Changed 
+### Changed
 
-  - Update parent version to 6.5.0
-  - Remove unused clj-time dependency
+- Update parent version to 6.5.0
+- Remove unused clj-time dependency
 
 ## [0.9.0] - 2019-04-17
 
@@ -51,6 +56,6 @@ Test release to verify the release process.
 
 ### Changed
 
-  - Update parent to version 6.3.0.
+- Update parent to version 6.3.0.
 
  
