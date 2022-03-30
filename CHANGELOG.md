@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Changed
+
+- Update to parent version 6.7.10
+
 ## [2.0.6] - 2022-03-29
 
 ### Changed
