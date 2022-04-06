@@ -1,4 +1,4 @@
-(def parent-version "6.7.10")
+(def parent-version "6.7.11")
 
 (defproject sixsq.nuvla.ring/code "2.0.8-SNAPSHOT"
 
