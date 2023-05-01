@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## Released
+
 ## [2.0.8] - 2022-04-06
 
 ### Changed
