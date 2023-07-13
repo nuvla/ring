@@ -1,4 +1,4 @@
-(def parent-version "6.7.11")
+(def parent-version "6.7.13-SNAPSHOT")
 
 (defproject sixsq.nuvla.ring/code "2.0.9-SNAPSHOT"
 
@@ -10,7 +10,7 @@
             :url "http://www.apache.org/licenses/LICENSE-2.0.txt"
             :distribution :repo}
 
-  :plugins [[lein-parent "0.3.5"]]
+  :plugins [[lein-parent "0.3.9"]]
 
   :parent-project {:coords  [sixsq.nuvla/parent ~parent-version]
                    :inherit [:plugins
