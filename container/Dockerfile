@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM eclipse-temurin:21-alpine
 
 ARG GIT_BRANCH
 ARG GIT_COMMIT_ID
