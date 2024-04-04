@@ -15,13 +15,10 @@ LABEL ci.build.number=${CI_BUILD_NUMBER}
 LABEL ci.build.web.url=${CI_BUILD_WEB_URL}
 
 COPY target/dependency/lib /opt/nuvla/server/lib
-COPY --chmod=755 src/scripts/start.sh /opt/nuvla/server/bin/
 COPY src/scripts/log4j.properties /opt/nuvla/server/resources/
-
-RUN mkdir -p /opt/nuvla/server/lib.d/example
-
-RUN addgroup -S nuvla && adduser -S nuvla -G nuvla
-USER nuvla
+COPY src/scripts/start.sh /opt/nuvla/server/bin/
+RUN chmod 0755 /opt/nuvla/server/bin/start.sh \
+    && mkdir -p /opt/nuvla/server/lib.d/example
 
 ENV NUVLA_SERVER_INIT=sixsq.nuvla.server.example/init
 
