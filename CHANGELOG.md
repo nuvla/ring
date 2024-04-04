@@ -4,6 +4,13 @@
 
 ## Released
 
+## [2.1.0] - 2024-04-04
+
+- Dockerfile - Replace openjdk:11 by eclipse-temurin:21-alpine
+- Project.clj - Update to parent version 6.7.15
+- CI - Remove travis files
+- Gihub CI - jdk 21 and deprecated output fix
+
 ## [2.0.8] - 2022-04-06
 
 ### Changed
