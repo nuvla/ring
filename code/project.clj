@@ -2,7 +2,7 @@
 (def slf4j-version "2.0.12")
 (def logback-version "1.5.3")
 
-(defproject sixsq.nuvla.ring/code "2.1.1"
+(defproject sixsq.nuvla.ring/code "2.1.2-SNAPSHOT"
 
   :description "simple ring container for micro-services"
 
