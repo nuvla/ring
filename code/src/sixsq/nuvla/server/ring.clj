@@ -2,12 +2,12 @@
   "Provides a simple, generic ring application server that can be started
    either via the static 'main' function (e.g. for running as a daemon) or via
    the 'start' function (e.g. for testing from the REPL)."
-  (:require
-    [clojure.string :as str]
-    [clojure.tools.logging :as log])
-  (:import
-    [java.io Closeable]
-    [java.net InetSocketAddress])
+  (:require [aleph.http :refer [start-server]]
+            [clojure.string :as str]
+            [clojure.tools.logging :as log]
+            [environ.core :refer [env]])
+  (:import [java.io Closeable]
+           [java.net InetSocketAddress])
   (:gen-class))
 
 
@@ -60,11 +60,10 @@
 
 
 (defn- register-shutdown-hook
-  "Registers a shutdown hook in the JVM to shutdown the application and
+  "Registers a shutdown hook in the JVM to shut down the application and
    application container cleanly."
   [shutdown-fn]
-  (.. (Runtime/getRuntime)
-      (addShutdownHook (hook shutdown-fn))))
+  (.addShutdownHook (Runtime/getRuntime) (hook shutdown-fn)))
 
 
 (defn- create-shutdown-fn
@@ -86,11 +85,9 @@
   "Starts the aleph container with the given ring handler and on the given
    port. Returns the server object that has been started, which can be stopped
    by calling 'close' on the object."
-  [handler ^long port host]
+  [handler ^long port ^String host]
   (log/info "starting aleph application container on host:port" (str host ":" port))
-  (let [start-server (dyn-resolve 'aleph.http/start-server)
-        server (->> port
-                    (InetSocketAddress. host)
+  (let [server (->> (InetSocketAddress. host port)
                     (hash-map :socket-address)
                     (start-server handler))]
     (log/info "started aleph application container on host:port" (str host ":" port))
@@ -98,7 +95,7 @@
 
 
 (defn- validate-host
-  "If the argument is the a valid string representation of an IP address or
+  "If the argument is a valid string representation of an IP address or
    host, the value is returned. Otherwise, the default host is returned."
   [host]
   (if (and (string? host) (not (str/blank? host)))
@@ -125,19 +122,19 @@
 
 (defn start
   "Starts the application and application server. Return a 'stop' function
-   that will shutdown the application and server when called."
+   that will shut down the application and server when called."
   [server-init & [port host]]
   (let [server-init-fn (dyn-resolve server-init)
         [handler finalization-fn] (server-init-fn)
-        port (parse-port port)
-        host (validate-host host)]
+        port           (parse-port port)
+        host           (validate-host host)]
 
     (log/info "starting " server-init "on" host "and port" port)
     (log/info "java vendor: " (System/getProperty "java.vendor"))
     (log/info "java version: " (System/getProperty "java.version"))
     (log/info "java classpath: " (System/getProperty "java.class.path"))
 
-    (let [server (start-container handler port host)
+    (let [server      (start-container handler port host)
           shutdown-fn (create-shutdown-fn server finalization-fn)]
 
       (log/info "started" server-init "on" host "and port" port)
@@ -157,8 +154,7 @@
    function. Starting the server from the REPL will use the values given to the
    start function."
   []
-  (let [env (dyn-resolve 'environ.core/env)
-        server-port (env :nuvla-server-port)
+  (let [server-port (env :nuvla-server-port)
         server-host (env :nuvla-server-host)]
     (if-let [server-init (env :nuvla-server-init)]
       [server-init server-port server-host]

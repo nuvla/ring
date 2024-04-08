@@ -1,9 +1,7 @@
 (ns sixsq.nuvla.server.ring-test
-  (:require
-    [clojure.test :refer [are deftest is]]
-    [sixsq.nuvla.server.ring :as t])
-  (:import
-    (clojure.lang ExceptionInfo)))
+  (:require [clojure.test :refer [are deftest is]]
+            [sixsq.nuvla.server.ring :as t])
+  (:import (clojure.lang ExceptionInfo)))
 
 
 (deftest check-as-symbol
@@ -50,3 +48,13 @@
                           10 10
                           10 "10")))
 
+(deftest start
+  (let [shutdown-fn (t/start 'sixsq.nuvla.server.example/init)]
+    (is (true? (fn? shutdown-fn)))
+    (shutdown-fn)))
+
+(deftest register-shutdown-hook
+  (#'t/register-shutdown-hook prn))
+
+(deftest server-cfg
+  (is (thrown-with-msg? ExceptionInfo #"NUVLA_SERVER_INIT is not defined" (#'t/server-cfg))))

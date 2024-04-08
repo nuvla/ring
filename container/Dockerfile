@@ -18,7 +18,11 @@ COPY target/dependency/lib /opt/nuvla/server/lib
 COPY src/scripts/log4j.properties /opt/nuvla/server/resources/
 COPY src/scripts/start.sh /opt/nuvla/server/bin/
 RUN chmod 0755 /opt/nuvla/server/bin/start.sh \
-    && mkdir -p /opt/nuvla/server/lib.d/example
+    && mkdir -p /opt/nuvla/server/lib.d/
+
+RUN apk upgrade --update-cache --available && \
+    apk add openssl && \
+    rm -rf /var/cache/apk/*
 
 ENV NUVLA_SERVER_INIT=sixsq.nuvla.server.example/init
 
