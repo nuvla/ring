@@ -4,6 +4,13 @@
 
 ## Released
 
+## [2.1.1] - 2024-04-08
+
+- Dockerfile - Replace openjdk:11 by eclipse-temurin:21-alpine
+- Project.clj - Update to parent version 6.8.0
+- Project.clj Proper logging deps for slf4j and logback
+- Dockerfile - Install openssl needed for server ssl certs/keys generation
+
 ## [2.1.0] - 2024-04-04
 
 - Dockerfile - Replace openjdk:11 by eclipse-temurin:21-alpine
