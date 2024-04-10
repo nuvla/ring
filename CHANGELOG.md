@@ -4,6 +4,12 @@
 
 ## Released
 
+## [2.1.2] - 2024-04-10
+
+- Dockerfile - Install curl
+- Container dependency - Exclude lein plugins test report from container dependency
+- Container dpendnecey - Fix prependGroupId
+
 ## [2.1.1] - 2024-04-08
 
 - Dockerfile - Replace openjdk:11 by eclipse-temurin:21-alpine
