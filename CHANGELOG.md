@@ -4,6 +4,14 @@
 
 ## Released
 
+## [2.1.3](https://github.com/nuvla/ring/compare/v2.1.3-SNAPSHOT...2.1.3) (2024-07-25)
+
+
+### Bug Fixes
+
+* **ci:** 1 ([6b7b70f](https://github.com/nuvla/ring/commit/6b7b70f77ccade678414d3916e1ae50dc1c0d1ef))
+* **ci:** 2 ([0f6f9c0](https://github.com/nuvla/ring/commit/0f6f9c0255b05ebaca7b05d953079dd6c184564c))
+
 ## [2.1.2] - 2024-04-10
 
 - Dockerfile - Install curl
@@ -91,5 +99,3 @@ Test release to verify the release process.
 ### Changed
 
 - Update parent to version 6.3.0.
-
- 
