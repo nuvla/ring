@@ -4,6 +4,13 @@
 
 ## Released
 
+## [2.1.5](https://github.com/nuvla/ring/compare/2.1.4...2.1.5) (2024-07-26)
+
+
+### Continuous Integration
+
+* **github:** fix env for clojars secrets ([6e1da07](https://github.com/nuvla/ring/commit/6e1da074edf11981d4186759de2ef2b7a35c2efc))
+
 ## [2.1.4](https://github.com/nuvla/ring/compare/2.1.3...2.1.4) (2024-07-26)
 
 
