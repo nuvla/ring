@@ -8,7 +8,6 @@ on:
   push:
     branches:
       - '*'
-      - '!master'
       - '!release-please-*'
   workflow_dispatch:
 
@@ -17,17 +16,27 @@ jobs:
     name: "Prepare"
     runs-on: ubuntu-latest
     outputs:
-      branch: ${{ steps.extract_branch.outputs.branch }}
+      branch: ${{ steps.prepare-step.outputs.branch }}
+      snapshot: ${{ steps.prepare-step.outputs.snapshot }}
     steps:
       - name: Extract branch name and substitute slashes
         shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | tr '/' '-' >> $GITHUB_OUTPUT
-        id: extract_branch
+        working-directory: code
+        run: |
+          echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | tr '/' '-' >> $GITHUB_OUTPUT
+          echo "## Checking if string ends with the suffix"
+          if [[ "$(lein project-version)" == *"${SNAPSHOT}" ]]; then
+            echo "snapshot=true" >> $GITHUB_ENV
+          else
+            echo "snapshot=false" >> $GITHUB_ENV
+          fi
+        id: prepare-step
 
   build:
     name: "Build and push"
     uses: ./.github/workflows/build.yml
     needs: [prepare]
+    if: ${{ needs.prepare.outputs.snapshot }}
     with:
       DOCKER_REPO: nuvladev
       DOCKER_TAG: ${{ needs.prepare.outputs.branch }}
