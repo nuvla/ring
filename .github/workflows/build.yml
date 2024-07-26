@@ -15,8 +15,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.extract_branch.outputs.branch }}
     steps:
-
       - name: Extract branch name and substitute slashes
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | tr '/' '-' >> $GITHUB_OUTPUT
@@ -26,14 +27,13 @@ jobs:
     uses: ./.github/workflows/common.yml
     with:
       DOCKER_REPO: nuvladev
-      DOCKER_TAG: ${{ steps.extract_branch.outputs.branch }}
+      DOCKER_TAG: ${{ needs.build.outputs.branch }}
     secrets: inherit
 
   notify:
     if: always()
     name: Post Workflow Status To Slack
-    needs:
-      - build
+    needs: [common]
     runs-on: ubuntu-latest
     steps:
       - uses: Gamesight/slack-workflow-status@master
