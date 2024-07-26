@@ -4,7 +4,7 @@
 
 (defproject com.sixsq.nuvla/ring
   ; x-release-please-start-version
-  "2.1.7-SNAPSHOT"
+  "2.1.7"
   ; x-release-please-end
 
   :description "simple ring container for micro-services"

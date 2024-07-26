@@ -4,6 +4,13 @@
 
 ## Released
 
+## [2.1.7](https://github.com/nuvla/ring/compare/2.1.6...2.1.7) (2024-07-26)
+
+
+### Continuous Integration
+
+* **github-action:** Review workspace dispatch logic ([de1d839](https://github.com/nuvla/ring/commit/de1d83969ab455a7bbf18ad2d120d13e47ad86ab))
+
 ## [2.1.6](https://github.com/nuvla/ring/compare/2.1.5...2.1.6) (2024-07-26)
 
 
