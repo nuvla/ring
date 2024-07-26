@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       branch: ${{ steps.prepare-step.outputs.branch }}
-      snapshot: ${{ steps.prepare-step.outputs.snapshot }}
+      version: ${{ steps.prepare-step.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,12 +28,9 @@ jobs:
         working-directory: code
         run: |
           echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | tr '/' '-' >> $GITHUB_OUTPUT
-          echo "## Checking if string ends with the suffix"
-          if [[ "$(lein project-version)" == *"${SNAPSHOT}" ]]; then
-            echo "snapshot=true" >> $GITHUB_OUTPUT
-          else
-            echo "snapshot=false" >> $GITHUB_OUTPUT
-          fi
+          version=$(lein project-version)
+          echo "project version=${version}"
+          echo "version=${version}" >> $GITHUB_OUTPUT
         id: prepare-step
 
   build:
@@ -43,7 +40,7 @@ jobs:
     with:
       DOCKER_REPO: nuvladev
       DOCKER_TAG: ${{ needs.prepare.outputs.branch }}
-      PUSH_CLOJARS: ${{ needs.prepare.outputs.snapshot == 'true'}}
+      PUSH_CLOJARS: ${{ endsWith(needs.prepare.outputs.version, 'SNAPSHOT')}}
     secrets: inherit
 
   notify:
