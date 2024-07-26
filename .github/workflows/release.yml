@@ -34,74 +34,10 @@ jobs:
     if: needs.trigger-release.outputs.release_created
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: ./.github/actions/common
         with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting for sonar
-          fetch-depth: 0
-
-      - name: Cache local M2 repository
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-lein-${{ hashFiles('**/project.clj') }}
-          restore-keys: |
-            ${{ runner.os }}-lein-
-            - name: Cache local M2 repository
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-
-      - name: Import GPG key
-        run: echo $GPG_KEY | base64 --decode | gpg --batch --import
-        env:
-          GPG_KEY: ${{ secrets.GPG_SIXSQ_RELEASE_KEY }}
-
-      - name: Deploy to clojars
-        working-directory: code
-        run: lein deploy clojars
-        env:
-          CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
-          CLOJARS_PASSWORD: ${{ secrets.CLOJARS_PASSWORD }}
-
-      - name: Build with lein
-        working-directory: code
-        run: |
-          lein install
-          lein libdir
-
-      - name: Copy relevant files
-        working-directory: code
-        run: |
-          mkdir -p ../container/target/dependency
-          cp -r target/lib/ ../container/target/dependency/
-          cp target/ring-$(lein project-version).jar ../container/target/dependency/lib/
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.SIXSQ_DOCKER_USERNAME }}
-          password: ${{ secrets.SIXSQ_DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: ./container
-          file: container/Dockerfile
-          build-args: |
-            GIT_BRANCH=${{ github.head_ref || github.ref_name }}
-            GIT_BUILD_TIME=
-            GIT_COMMIT_ID=${{ github.sha }}
-            PACKAGE_TAG=${{ needs.trigger-release.outputs.tag_name }}
-            GITHUB_RUN_NUMBER=${{ github.run_number }}
-            GITHUB_RUN_ID=${{ github.run_id }}
-            PROJECT_URL=${{ github.server_url }}/${{ github.repository }}
-          push: true
-          tags: >
-            nuvla/ring:${{ needs.trigger-release.outputs.tag_name }},
-            nuvla/ring:latest
+          DOCKER_REPO: nuvla
+          DOCKER_TAG: ${{ needs.trigger-release.outputs.tag_name }}
 
   notify:
     name: Post Workflow Status To Slack
