@@ -1,7 +1,7 @@
 name: "Setup base"
 
 inputs:
-  c:
+  INPUT_TXT:
     description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
     required: true
 
