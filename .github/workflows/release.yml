@@ -11,6 +11,7 @@ on:
 
 jobs:
   trigger-release:
+    name: "Trigger release"
     runs-on: ubuntu-latest
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
@@ -21,37 +22,25 @@ jobs:
 
     steps:
       - id: release
-        uses:  googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target-branch: ${{ github.ref_name }}
           config-file: .github/release-please-config.json
           manifest-file: .github/release-please-manifest.json
 
-  release:
-    name: "Release Ring image to DockerHub"
+  build:
+    name: "Build and push"
+    uses: ./.github/workflows/build.yml
     needs: [ trigger-release ]
-    if: needs.trigger-release.outputs.release_created
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting for sonar
-          fetch-depth: 0
-
-      - name: Import GPG key
-        run: echo $GPG_KEY | base64 --decode | gpg --batch --import
-        env:
-          GPG_KEY: ${{ secrets.GPG_SIXSQ_RELEASE_KEY }}
-
-      - uses: ./.github/actions/common
-        with:
-          DOCKER_REPO: nuvla
-          DOCKER_TAG: ${{ needs.trigger-release.outputs.tag_name }}
+    with:
+      DOCKER_REPO: nuvla
+      DOCKER_TAG: ${{ needs.trigger-release.outputs.tag_name }}
+    secrets: inherit
 
   notify:
-    name: Post Workflow Status To Slack
-    needs: [release]
+    name: "Notify Slack"
+    needs: [build]
     if: needs.trigger-release.outputs.release_created
     runs-on: ubuntu-latest
     steps:

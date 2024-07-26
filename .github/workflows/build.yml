@@ -108,6 +108,11 @@ jobs:
         with:
           files: code/test-reports/TEST-*.xml
 
+      - name: Import GPG key
+        run: echo $GPG_KEY | base64 --decode | gpg --batch --import
+        env:
+          GPG_KEY: ${{ secrets.GPG_SIXSQ_RELEASE_KEY }}
+
       - name: Deploy to clojars
         working-directory: code
         run: lein deploy clojars
