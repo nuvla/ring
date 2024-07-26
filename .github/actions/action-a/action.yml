@@ -17,5 +17,6 @@ runs:
   steps:
     - name: Setup tmate session
       id: workspace_root
+      shell: bash
       run: echo "WORKSPACE_ROOT=${INPUT_TXT} to output" | tee -a $GITHUB_OUTPUT
 
