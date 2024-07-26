@@ -1,0 +1,43 @@
+name: Dev
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - '*'
+      - '!master'
+      - '!release-please-*'
+  workflow_dispatch:
+
+jobs:
+  extract_branch_name:
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.extract_branch.outputs.branch }}
+    steps:
+      - name: Extract branch name and substitute slashes
+        shell: bash
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | tr '/' '-' >> $GITHUB_OUTPUT
+        id: extract_branch
+
+  build:
+    uses: ./.github/workflows/build.yml
+    needs: [dev]
+    with:
+      DOCKER_REPO: nuvladev
+      DOCKER_TAG: ${{ needs.dev.outputs.branch }}
+    secrets: inherit
+
+  notify:
+    if: always()
+    name: Post Workflow Status To Slack
+    needs: [common]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Gamesight/slack-workflow-status@master
+        with:
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
