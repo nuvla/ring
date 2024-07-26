@@ -4,6 +4,13 @@
 
 ## Released
 
+## [2.1.10](https://github.com/nuvla/ring/compare/2.1.9...2.1.10) (2024-07-26)
+
+
+### Continuous Integration
+
+* **github-action:** Push clojars endsWith expression ([745f69a](https://github.com/nuvla/ring/commit/745f69a38da5fafce341d1864d4348694d0ab9c1))
+
 ## [2.1.9](https://github.com/nuvla/ring/compare/2.1.8...2.1.9) (2024-07-26)
 
 
