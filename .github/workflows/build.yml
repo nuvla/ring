@@ -23,7 +23,7 @@ jobs:
         id: extract_branch
 
   common:
-    uses: ./.github/workflows/common
+    uses: ./.github/workflows/common.yml
     with:
       DOCKER_REPO: nuvladev
       DOCKER_TAG: ${{ steps.extract_branch.outputs.branch }}
