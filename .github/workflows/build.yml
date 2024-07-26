@@ -8,6 +8,7 @@ on:
   push:
     branches:
       - '*'
+      - '!master'
       - '!release-please-*'
   workflow_dispatch:
 
@@ -19,6 +20,15 @@ jobs:
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting for sonar
           fetch-depth: 0
+
+      - uses: .github/actions/action-a
+        id: setup_base
+        with:
+          INPUT_TXT: HelloWorld
+
+      - name: Cache local M2 repository
+        run: echo ${{ steps.setup_base.outputs.OUTPUT_TXT }}
+
       - name: Cache local M2 repository
         uses: actions/cache@v4
         with:

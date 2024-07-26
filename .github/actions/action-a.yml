@@ -1,0 +1,21 @@
+name: "Setup base"
+
+inputs:
+  c:
+    description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+    required: true
+
+outputs:
+  OUTPUT_TXT:
+    description: ''
+    value: ${{ steps.workspace_root.outputs.WORKSPACE_ROOT }}
+
+description: ''
+
+runs:
+  using: "composite"
+  steps:
+    - name: Setup tmate session
+      id: workspace_root
+      run: echo "WORKSPACE_ROOT=${INPUT_TXT} to output" | tee -a $GITHUB_OUTPUT
+
