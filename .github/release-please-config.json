@@ -1,5 +1,4 @@
 {
-    "bootstrap-sha": "dcf2e7e346be5043a6172cb5e723e15da7c7e9b5",
     "packages": {
       ".": {
         "release-type": "java",
