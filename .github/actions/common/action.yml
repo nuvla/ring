@@ -7,6 +7,29 @@ inputs:
   DOCKER_TAG:
     description: 'Tag to push'
     required: true
+  GITHUB_TOKEN:
+    description: ''
+    required: true
+  SONARQUBE_TOKEN:
+    description: ''
+    required: true
+  SONAR_HOST_URL:
+    description: ''
+    required: true
+  CLOJARS_USERNAME:
+    description: ''
+    required: true
+  CLOJARS_PASSWORD:
+    description: ''
+    required: true
+  SIXSQ_DOCKER_USERNAME:
+    description: ''
+    required: true
+  SIXSQ_DOCKER_PASSWORD:
+    description: ''
+    required: true
+
+
 
 description: 'Common action to be reused in workflows'
 
