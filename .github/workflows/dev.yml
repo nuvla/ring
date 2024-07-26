@@ -28,7 +28,7 @@ jobs:
     needs: [extract_branch_name]
     with:
       DOCKER_REPO: nuvladev
-      DOCKER_TAG: ${{ needs.dev.outputs.branch }}
+      DOCKER_TAG: ${{ needs.extract_branch_name.outputs.branch }}
     secrets: inherit
 
   notify:
