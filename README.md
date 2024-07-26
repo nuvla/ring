@@ -1,6 +1,6 @@
 # Nuvla Ring Container
 
-[![Build Status](https://github.com/nuvla/ring/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/nuvla/ring/actions/workflows/main.yml)
+[![Build](https://github.com/nuvla/ring/actions/workflows/build.yml/badge.svg)](https://github.com/nuvla/ring/actions/workflows/build.yml)
 
 This repository contains the code and configuration to create a
 simple, ring-based Docker container for web applications.  Build from
@@ -14,7 +14,7 @@ files in the subdirectories for more information.
    repository](https://hub.docker.com/r/nuvla/ring)
    on Docker Hub.
 
- - `sixsq.nuvla.ring/code` jar file: Jar file containing the ring
+ - `com.sixsq.nuvla.ring/code` jar file: Jar file containing the ring
    server code.  Available from the release maven repository
    maintained in AWS S3.  See the `project.clj` file in the
    nuvla/parent repository for the URL.

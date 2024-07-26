@@ -1,4 +1,4 @@
-(ns sixsq.nuvla.server.example
+(ns com.sixsq.nuvla.server.example
   "Provides a simple ring example to ensure that generic ring container works.")
 
 

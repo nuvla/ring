@@ -42,7 +42,7 @@ must provide the namespace for the init function as an environmental
 variable:
 
 ```sh
-NUVLA_SERVER_INIT=sixsq.nuvla.server.example/init
+NUVLA_SERVER_INIT=com.sixsq.nuvla.server.example/init
 ```
 
 You can also modify the variables:

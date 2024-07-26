@@ -25,7 +25,7 @@ RUN apk upgrade --update-cache --available && \
     apk --no-cache add curl && \
     rm -rf /var/cache/apk/*
 
-ENV NUVLA_SERVER_INIT=sixsq.nuvla.server.example/init
+ENV NUVLA_SERVER_INIT=com.sixsq.nuvla.server.example/init
 
 EXPOSE 8200
 

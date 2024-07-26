@@ -1,6 +1,6 @@
-(ns sixsq.nuvla.server.ring-test
+(ns com.sixsq.nuvla.server.ring-test
   (:require [clojure.test :refer [are deftest is]]
-            [sixsq.nuvla.server.ring :as t])
+            [com.sixsq.nuvla.server.ring :as t])
   (:import (clojure.lang ExceptionInfo)))
 
 
@@ -49,7 +49,7 @@
                           10 "10")))
 
 (deftest start
-  (let [shutdown-fn (t/start 'sixsq.nuvla.server.example/init)]
+  (let [shutdown-fn (t/start 'com.sixsq.nuvla.server.example/init)]
     (is (true? (fn? shutdown-fn)))
     (shutdown-fn)))
 
