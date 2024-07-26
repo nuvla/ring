@@ -16,27 +16,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting for sonar
-          fetch-depth: 0
 
       - name: Extract branch name and substitute slashes
         shell: bash
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | tr '/' '-' >> $GITHUB_OUTPUT
         id: extract_branch
 
-      - uses: ./.github/actions/common
+      - name: common_workflow
+        uses: ./.github/workflows/common
         with:
           DOCKER_REPO: nuvladev
           DOCKER_TAG: ${{ steps.extract_branch.outputs.branch }}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          SONARQUBE_TOKEN: ${{secrets.SONARQUBE_TOKEN}}
-          SONAR_HOST_URL: ${{secrets.SONAR_HOST_URL}}
-          CLOJARS_USERNAME: ${{secrets.CLOJARS_USERNAME}}
-          CLOJARS_PASSWORD: ${{secrets.CLOJARS_PASSWORD}}
-          SIXSQ_DOCKER_USERNAME: ${{secrets.SIXSQ_DOCKER_USERNAME}}
-          SIXSQ_DOCKER_PASSWORD: ${{secrets.SIXSQ_DOCKER_PASSWORD}}
+        secrets: inherit
 
   notify:
     if: always()

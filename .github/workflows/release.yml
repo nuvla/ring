@@ -39,6 +39,11 @@ jobs:
           # Disabling shallow clone is recommended for improving relevancy of reporting for sonar
           fetch-depth: 0
 
+      - name: Import GPG key
+        run: echo $GPG_KEY | base64 --decode | gpg --batch --import
+        env:
+          GPG_KEY: ${{ secrets.GPG_SIXSQ_RELEASE_KEY }}
+
       - uses: ./.github/actions/common
         with:
           DOCKER_REPO: nuvla
