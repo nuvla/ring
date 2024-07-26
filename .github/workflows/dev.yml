@@ -34,7 +34,7 @@ jobs:
   notify:
     if: always()
     name: Post Workflow Status To Slack
-    needs: [common]
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - uses: Gamesight/slack-workflow-status@master
