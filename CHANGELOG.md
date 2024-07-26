@@ -4,6 +4,14 @@
 
 ## Released
 
+## [2.1.4](https://github.com/nuvla/ring/compare/2.1.3...2.1.4) (2024-07-26)
+
+
+### Continuous Integration
+
+* **github:** Import missing GPG key ([3960576](https://github.com/nuvla/ring/commit/3960576442875eb22dc7cae00f6121e3ea534425))
+* **release-please:** Remove bootstrap-sha ([058e581](https://github.com/nuvla/ring/commit/058e581e4d2d68203602e3dffd90cee0489dc780))
+
 ## [2.1.3](https://github.com/nuvla/ring/compare/v2.1.3-SNAPSHOT...2.1.3) (2024-07-26)
 
 
