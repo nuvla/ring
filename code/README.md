@@ -36,13 +36,13 @@ Starting with the REPL
 To start the service via the REPL, directly use the `start` function:
 
 ```
-(require '[sixsq.nuvla.server.ring :as server])
-(def stop (server/start 'sixsq.nuvla.server.example/init 5000))
+(require '[com.sixsq.nuvla.server.ring :as server])
+(def stop (server/start 'com.sixsq.nuvla.server.example/init 5000))
 ;; service on  http://localhost:5000 should return "Ring Example Running!"
 (stop)
 ```
 
-This will load the namespace "sixsq.nuvla.server.ring-example" and
+This will load the namespace "com.sixsq.nuvla.server.ring-example" and
 execute the initialization function "init" from that namespace.  It
 will then start the service asynchronously on the port "5000".  The
 function returns a shutdown function, which must be called to stop the

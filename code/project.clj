@@ -2,7 +2,10 @@
 (def slf4j-version "2.0.12")
 (def logback-version "1.5.3")
 
-(defproject sixsq.nuvla.ring/code "2.1.3-SNAPSHOT"
+(defproject com.sixsq.nuvla/ring
+  ; x-release-please-start-version
+  "2.1.3-SNAPSHOT"
+  ; x-release-please-end
 
   :description "simple ring container for micro-services"
 
@@ -12,7 +15,10 @@
             :url          "http://www.apache.org/licenses/LICENSE-2.0.txt"
             :distribution :repo}
 
-  :plugins [[lein-parent "0.3.9"]]
+  :plugins [[lein-parent "0.3.9"]
+            [lein-libdir "0.1.1"]]
+
+  :libdir-path "target/lib"
 
   :parent-project {:coords  [sixsq.nuvla/parent ~parent-version]
                    :inherit [:plugins
@@ -25,7 +31,7 @@
 
   :pom-location "target/"
 
-  :aot [sixsq.nuvla.server.ring]
+  :aot [com.sixsq.nuvla.server.ring]
 
   :dependencies
   [[aleph "0.7.1"]

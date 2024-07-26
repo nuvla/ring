@@ -1,4 +1,4 @@
-(ns sixsq.nuvla.server.ring
+(ns com.sixsq.nuvla.server.ring
   "Provides a simple, generic ring application server that can be started
    either via the static 'main' function (e.g. for running as a daemon) or via
    the 'start' function (e.g. for testing from the REPL)."

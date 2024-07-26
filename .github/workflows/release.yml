@@ -1,0 +1,111 @@
+name: Release
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  trigger-release:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      major: ${{ steps.release.outputs.major }}
+      minor: ${{ steps.release.outputs.minor }}
+      patch: ${{ steps.release.outputs.patch }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+
+    steps:
+      - id: release
+        uses:  googleapis/release-please-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          target-branch: ${{ github.ref_name }}
+          config-file: .github/release-please-config.json
+          manifest-file: .github/release-please-manifest.json
+
+  release:
+    name: "Release Ring image to DockerHub"
+    needs: [ trigger-release ]
+    if: needs.trigger-release.outputs.release_created
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting for sonar
+          fetch-depth: 0
+
+      - name: Cache local M2 repository
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-lein-${{ hashFiles('**/project.clj') }}
+          restore-keys: |
+            ${{ runner.os }}-lein-
+            - name: Cache local M2 repository
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Deploy to clojars
+        working-directory: code
+        run: lein deploy clojars
+        env:
+          clojars_username: ${{ secrets.CLOJARS_USERNAME }}
+          clojars_password: ${{ secrets.CLOJARS_PASSWORD }}
+
+      - name: Build with lein
+        working-directory: code
+        run: |
+          lein install
+          lein libdir
+
+      - name: Copy relevant files
+        working-directory: code
+        run: |
+          mkdir -p ../container/target/dependency
+          cp -r target/lib/ ../container/target/dependency/
+          cp target/ring-$(lein project-version).jar ../container/target/dependency/lib/
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.SIXSQ_DOCKER_USERNAME }}
+          password: ${{ secrets.SIXSQ_DOCKER_PASSWORD }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./container
+          file: container/Dockerfile
+          build-args: |
+            GIT_BRANCH=${{ github.head_ref || github.ref_name }}
+            GIT_BUILD_TIME=
+            GIT_COMMIT_ID=${{ github.sha }}
+            PACKAGE_TAG=${{ needs.trigger-release.outputs.tag_name }}
+            GITHUB_RUN_NUMBER=${{ github.run_number }}
+            GITHUB_RUN_ID=${{ github.run_id }}
+            PROJECT_URL=${{ github.server_url }}/${{ github.repository }}
+          push: true
+          tags: >
+            nuvla/ring:${{ needs.trigger-release.outputs.tag_name }},
+            nuvla/ring:latest
+
+  notify:
+    name: Post Workflow Status To Slack
+    needs: [release]
+    if: needs.trigger-release.outputs.release_created
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Gamesight/slack-workflow-status@master
+        with:
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
+          include_commit_message: true
