@@ -22,12 +22,12 @@ jobs:
         run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | tr '/' '-' >> $GITHUB_OUTPUT
         id: extract_branch
 
-      - name: common_workflow
-        uses: ./.github/workflows/common
-        with:
-          DOCKER_REPO: nuvladev
-          DOCKER_TAG: ${{ steps.extract_branch.outputs.branch }}
-        secrets: inherit
+  common:
+    uses: ./.github/workflows/common
+    with:
+      DOCKER_REPO: nuvladev
+      DOCKER_TAG: ${{ steps.extract_branch.outputs.branch }}
+    secrets: inherit
 
   notify:
     if: always()
