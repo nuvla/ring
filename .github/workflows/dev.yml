@@ -25,7 +25,7 @@ jobs:
 
   build:
     uses: ./.github/workflows/build.yml
-    needs: [dev]
+    needs: [extract_branch_name]
     with:
       DOCKER_REPO: nuvladev
       DOCKER_TAG: ${{ needs.dev.outputs.branch }}
