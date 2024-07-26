@@ -1,15 +1,14 @@
-name: Build
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref_name }}
-  cancel-in-progress: true
+name: Common
 
 on:
-  push:
-    branches:
-      - '*'
-      - '!release-please-*'
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      DOCKER_REPO:
+        required: true
+        type: string
+      DOCKER_TAG:
+        required: true
+        type: string
 
 jobs:
   build:
@@ -19,6 +18,7 @@ jobs:
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting for sonar
           fetch-depth: 0
+
       - name: Cache local M2 repository
         uses: actions/cache@v4
         with:
@@ -36,13 +36,17 @@ jobs:
 
       # Ubuntu Repos on Azure fail often. Attempt to install before other
       # long-running operations.
+      # xmllinter for tests checks
+      # jq for SonarQube Quality Gate check
       - name: Install xmllinter (for "Fail on failed tests")
+        shell: bash
         run: |
           sudo apt-get update
-          sudo apt-get install -y libxml2-utils
+          sudo apt-get install -y libxml2-utils jq
 
       - name: Project version
         working-directory: code
+        shell: bash
         run: |
           VERSION=$( lein project-version )
           echo "version=$VERSION" >> $GITHUB_OUTPUT
@@ -58,6 +62,7 @@ jobs:
           # provide GITHUB_TOKEN to get access to secrets.SONARQUBE_TOKEN
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         working-directory: code
+        shell: bash
         run: sonar-scanner -Dsonar.token=${{ secrets.SONARQUBE_TOKEN }} -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} -Dsonar.projectVersion=${{ steps.project_version.outputs.version }}
 
       - name: Get list of tests
@@ -70,6 +75,7 @@ jobs:
 
       - name: Fail on failed tests
         if: always()
+        shell: bash
         run: |
           echo "Found ${{ steps.tests.outputs.path_count }} test report(s)"
           if [[ ${{ steps.tests.outputs.path_count }} < 1 ]]; then
@@ -88,15 +94,8 @@ jobs:
           fi
           done
 
-      - name: jq for SonarQube Quality Gate check
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y jq
-
       - name: SonarQube Quality Gate check
         uses: sonarsource/sonarqube-quality-gate-action@v1.1.0
-        # Force to fail step after specific time
-        timeout-minutes: 5
         with:
           scanMetadataReportFile: code/.scannerwork/report-task.txt
         env:
@@ -109,32 +108,36 @@ jobs:
         with:
           files: code/test-reports/TEST-*.xml
 
+      - name: Import GPG key
+        run: echo $GPG_KEY | base64 --decode | gpg --batch --import
+        env:
+          GPG_KEY: ${{ secrets.GPG_SIXSQ_RELEASE_KEY }}
+
       - name: Deploy to clojars
         working-directory: code
         run: lein deploy clojars
+        shell: bash
         env:
           CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}
           CLOJARS_PASSWORD: ${{ secrets.CLOJARS_PASSWORD }}
 
       - name: Build with lein
         working-directory: code
+        shell: bash
         run: |
           lein install
           lein libdir
 
       - name: Copy relevant files
         working-directory: code
+        shell: bash
         run: |
           mkdir -p ../container/target/dependency
           cp -r target/lib/ ../container/target/dependency/
           cp target/ring-$(lein project-version).jar ../container/target/dependency/lib/
 
-      - name: Extract branch name and substitute slashes
-        shell: bash
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | tr '/' '-' >> $GITHUB_OUTPUT
-        id: extract_branch
-
       - name: Build time
+        shell: bash
         run: echo "BUILD_TIME=$(date --utc +%FT%T.%3NZ)" >> $GITHUB_ENV
 
       - name: Login to Docker Hub
@@ -152,22 +155,11 @@ jobs:
             GIT_BRANCH=${{ github.head_ref || github.ref_name }}
             GIT_BUILD_TIME=${{ env.BUILD_TIME }}
             GIT_COMMIT_ID=${{ github.sha }}
-            PACKAGE_TAG=${{ needs.trigger-release.outputs.tag_name }}
+            PACKAGE_TAG=${{ steps.project_version.outputs.version }}
             GITHUB_RUN_NUMBER=${{ github.run_number }}
             GITHUB_RUN_ID=${{ github.run_id }}
             PROJECT_URL=${{ github.server_url }}/${{ github.repository }}
           push: true
           tags: >
-            nuvladev/ring:${{ steps.extract_branch.outputs.branch }}
-
-  notify:
-    if: always()
-    name: Post Workflow Status To Slack
-    needs:
-      - build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: Gamesight/slack-workflow-status@master
-        with:
-          repo_token: ${{secrets.GITHUB_TOKEN}}
-          slack_webhook_url: ${{secrets.SLACK_WEBHOOK_URL}}
+            ${{ inputs.DOCKER_REPO }}/ring:${{ inputs.DOCKER_TAG }},
+            ${{ inputs.DOCKER_REPO }}/ring:latest
