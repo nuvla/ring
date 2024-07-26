@@ -4,6 +4,13 @@
 
 ## Released
 
+## [2.1.8](https://github.com/nuvla/ring/compare/2.1.7...2.1.8) (2024-07-26)
+
+
+### Continuous Integration
+
+* **github-action:** Do not push to clojars from dev workflow when not snapshot ([652772e](https://github.com/nuvla/ring/commit/652772ea4950ffc2565366520b0ebdba33c60055))
+
 ## [2.1.7](https://github.com/nuvla/ring/compare/2.1.6...2.1.7) (2024-07-26)
 
 
