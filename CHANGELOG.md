@@ -4,6 +4,13 @@
 
 ## Released
 
+## [2.1.6](https://github.com/nuvla/ring/compare/2.1.5...2.1.6) (2024-07-26)
+
+
+### Continuous Integration
+
+* **github-action:** Reusable workflow ([91b8ef0](https://github.com/nuvla/ring/commit/91b8ef081fe11f5d75fdfcc6b1347b4c1dd053eb))
+
 ## [2.1.5](https://github.com/nuvla/ring/compare/2.1.4...2.1.5) (2024-07-26)
 
 
