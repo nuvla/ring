@@ -13,16 +13,6 @@ description: 'Common action to be reused in workflows'
 runs:
   using: "composite"
   steps:
-    - name: Setup tmate session
-      id: workspace_root
-      shell: bash
-      run: echo "WORKSPACE_ROOT=${{ inputs.INPUT_TXT }} to output" | tee -a $GITHUB_OUTPUT
-
-    - uses: actions/checkout@v4
-      with:
-        # Disabling shallow clone is recommended for improving relevancy of reporting for sonar
-        fetch-depth: 0
-
     - name: Cache local M2 repository
       uses: actions/cache@v4
       with:
