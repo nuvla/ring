@@ -37,7 +37,7 @@ jobs:
     with:
       DOCKER_REPO: nuvla
       DOCKER_TAG: ${{ needs.trigger-release.outputs.tag_name }}
-      SNAPSHOT: false
+      PUSH_CLOJARS: true
     secrets: inherit
 
   notify:

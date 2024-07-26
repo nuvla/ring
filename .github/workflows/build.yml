@@ -9,8 +9,8 @@ on:
       DOCKER_TAG:
         required: true
         type: string
-      SNAPSHOT:
-        required: false
+      PUSH_CLOJARS:
+        required: true
         type: boolean
 
 jobs:
@@ -119,6 +119,7 @@ jobs:
       - name: Deploy to clojars
         working-directory: code
         run: lein deploy clojars
+        if: ${{ inputs.PUSH_CLOJARS }}
         shell: bash
         env:
           CLOJARS_USERNAME: ${{ secrets.CLOJARS_USERNAME }}

@@ -43,7 +43,7 @@ jobs:
     with:
       DOCKER_REPO: nuvladev
       DOCKER_TAG: ${{ needs.prepare.outputs.branch }}
-      SNAPSHOT: ${{ needs.prepare.outputs.snapshot == 'true'}}
+      PUSH_CLOJARS: ${{ needs.prepare.outputs.snapshot == 'true'}}
     secrets: inherit
 
   notify:
