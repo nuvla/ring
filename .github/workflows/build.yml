@@ -161,5 +161,5 @@ jobs:
             PROJECT_URL=${{ github.server_url }}/${{ github.repository }}
           push: true
           tags: >
-            ${{ inputs.DOCKER_REPO }}/ring:${{ inputs.DOCKER_TAG }}
+            ${{ inputs.DOCKER_REPO }}/ring:${{ inputs.DOCKER_TAG }},
             ${{ inputs.DOCKER_REPO }}/ring:latest
