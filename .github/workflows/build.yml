@@ -9,6 +9,9 @@ on:
       DOCKER_TAG:
         required: true
         type: string
+      SNAPSHOT:
+        required: false
+        type: boolean
 
 jobs:
   build:

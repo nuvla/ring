@@ -28,6 +28,12 @@ jobs:
         working-directory: code
         run: |
           echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" | tr '/' '-' >> $GITHUB_OUTPUT
+          echo "## Checking if string ends with the suffix"
+          if [[ "$(lein project-version)" == *"${SNAPSHOT}" ]]; then
+            echo "snapshot=true" >> $GITHUB_OUTPUT
+          else
+            echo "snapshot=false" >> $GITHUB_OUTPUT
+          fi
         id: prepare-step
 
   build:
@@ -37,6 +43,7 @@ jobs:
     with:
       DOCKER_REPO: nuvladev
       DOCKER_TAG: ${{ needs.prepare.outputs.branch }}
+      SNAPSHOT: ${{ needs.prepare.outputs.snapshot == 'true'}}
     secrets: inherit
 
   notify:
