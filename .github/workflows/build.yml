@@ -21,7 +21,7 @@ jobs:
           # Disabling shallow clone is recommended for improving relevancy of reporting for sonar
           fetch-depth: 0
 
-      - uses: .github/actions/action-a
+      - uses: ./.github/actions/action-a
         id: setup_base
         with:
           INPUT_TXT: HelloWorld
