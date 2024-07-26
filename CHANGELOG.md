@@ -4,6 +4,15 @@
 
 ## Released
 
+## [2.1.3](https://github.com/nuvla/ring/compare/v2.1.3-SNAPSHOT...2.1.3) (2024-07-26)
+
+
+### Continuous Integration
+
+* **github:** Github orchestrate build of ui docker image ([ec655c1](https://github.com/nuvla/ring/commit/ec655c19a91fad7928424b4ad0ba7ce2284cd249))
+* **maven:** Retire maven ([#14](https://github.com/nuvla/ring/issues/14)) ([ec655c1](https://github.com/nuvla/ring/commit/ec655c19a91fad7928424b4ad0ba7ce2284cd249))
+* **release-please:** Release please control version based on commit messages ([ec655c1](https://github.com/nuvla/ring/commit/ec655c19a91fad7928424b4ad0ba7ce2284cd249))
+
 ## [2.1.2] - 2024-04-10
 
 - Dockerfile - Install curl
@@ -91,5 +100,3 @@ Test release to verify the release process.
 ### Changed
 
 - Update parent to version 6.3.0.
-
- 
