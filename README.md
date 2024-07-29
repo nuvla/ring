@@ -1,6 +1,8 @@
 # Nuvla Ring Container
 
-[![Build](https://github.com/nuvla/ring/actions/workflows/build.yml/badge.svg)](https://github.com/nuvla/ring/actions/workflows/build.yml)
+[![Dev](https://github.com/nuvla/ring/actions/workflows/dev.yml/badge.svg)](https://github.com/nuvla/ring/actions/workflows/dev.yml)
+[![Release](https://github.com/nuvla/ring/actions/workflows/release.yml/badge.svg)](https://github.com/nuvla/ring/actions/workflows/release.yml)
+[![Docker Image Version (latest semver)](https://img.shields.io/docker/v/nuvla/ring?label=image&sort=semver&style=flat-square)](https://hub.docker.com/repository/docker/nuvla/ring/tags)
 
 This repository contains the code and configuration to create a
 simple, ring-based Docker container for web applications.  Build from
