@@ -4,6 +4,19 @@
 
 ## Released
 
+## [2.1.11](https://github.com/nuvla/ring/compare/2.1.10...2.1.11) (2024-07-29)
+
+
+### Bug Fixes
+
+* **README.md:** Update Build badge and add docker image badge ([6379663](https://github.com/nuvla/ring/commit/6379663daa9e593d606041533016d64ec4cfba3c))
+
+
+### Continuous Integration
+
+* **ci:** Remove unused version script ([0c15899](https://github.com/nuvla/ring/commit/0c15899eefe0b3ca0e101bc314f9b1eb6b16cbad))
+* **project.clj:** Fix repo url ([2c3e675](https://github.com/nuvla/ring/commit/2c3e6750580be8d265515d7b2d07d94a2a8057d8))
+
 ## [2.1.10](https://github.com/nuvla/ring/compare/2.1.9...2.1.10) (2024-07-26)
 
 
