@@ -9,7 +9,7 @@
 
   :description "simple ring container for micro-services"
 
-  :url "https://github.com/nuvla/server"
+  :url "https://github.com/nuvla/ring"
 
   :license {:name         "Apache 2.0"
             :url          "http://www.apache.org/licenses/LICENSE-2.0.txt"

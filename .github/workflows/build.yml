@@ -41,7 +41,7 @@ jobs:
       # long-running operations.
       # xmllinter for tests checks
       # jq for SonarQube Quality Gate check
-      - name: Install xmllinter (for "Fail on failed tests")
+      - name: Install xmllinter and jq (for "Fail on failed tests")
         shell: bash
         run: |
           sudo apt-get update
