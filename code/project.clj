@@ -34,10 +34,10 @@
   :aot [com.sixsq.nuvla.server.ring]
 
   :dependencies
-  [[aleph "0.7.1"]
+  [[aleph "0.8.2"]
    [environ "1.2.0"]
-   [ring/ring-core "1.12.1"]
-   [org.clojure/clojure "1.11.2"]
+   [ring/ring-core "1.13.0"]
+   [org.clojure/clojure "1.12.0"]
    [org.clojure/tools.logging "1.3.0"]
    [org.slf4j/slf4j-api ~slf4j-version]
    [org.slf4j/log4j-over-slf4j ~slf4j-version]
