@@ -4,6 +4,25 @@
 
 ## Released
 
+## [2.2.0](https://github.com/nuvla/ring/compare/2.1.10...2.2.0) (2025-01-31)
+
+
+### Features
+
+* **Dependencies:** Upgrade of dependencies ([e4728dd](https://github.com/nuvla/ring/commit/e4728dd6e3c386ebfb8245e08ce4a4c265de17ef))
+
+
+### Bug Fixes
+
+* **ci:** Clojure setup step needed ([e4728dd](https://github.com/nuvla/ring/commit/e4728dd6e3c386ebfb8245e08ce4a4c265de17ef))
+* **README.md:** Update Build badge and add docker image badge ([6379663](https://github.com/nuvla/ring/commit/6379663daa9e593d606041533016d64ec4cfba3c))
+
+
+### Continuous Integration
+
+* **ci:** Remove unused version script ([0c15899](https://github.com/nuvla/ring/commit/0c15899eefe0b3ca0e101bc314f9b1eb6b16cbad))
+* **project.clj:** Fix repo url ([2c3e675](https://github.com/nuvla/ring/commit/2c3e6750580be8d265515d7b2d07d94a2a8057d8))
+
 ## [2.1.10](https://github.com/nuvla/ring/compare/2.1.9...2.1.10) (2024-07-26)
 
 
