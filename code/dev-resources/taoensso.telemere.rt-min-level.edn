@@ -1,0 +1,4 @@
+{:default :info
+ ;:slf4j   [["*" :debug]
+ ;          ["org.apache.zookeeper.*" :error]]
+ }

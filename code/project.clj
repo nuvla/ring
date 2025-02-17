@@ -1,6 +1,6 @@
 (def parent-version "6.8.0")
 (def slf4j-version "2.0.12")
-(def logback-version "1.5.3")
+(def telemere-version "1.0.0-RC2")
 
 (defproject com.sixsq.nuvla/ring
   ; x-release-please-start-version
@@ -43,8 +43,8 @@
    [org.slf4j/log4j-over-slf4j ~slf4j-version]
    [org.slf4j/jul-to-slf4j ~slf4j-version]
    [org.slf4j/jcl-over-slf4j ~slf4j-version]
-   [ch.qos.logback/logback-classic ~logback-version]
-   [ch.qos.logback/logback-core ~logback-version]]
+   [com.taoensso/telemere ~telemere-version]
+   [com.taoensso/telemere-slf4j ~telemere-version]]
 
   :profiles
   {:test    {:source-paths          ["test"]
