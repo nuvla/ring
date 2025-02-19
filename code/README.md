@@ -57,10 +57,8 @@ See the documentation in the `rpm-container` module.
 Logging
 -------
 
-The service assumes that `clojure.tools.logging` will be used with the
-SLF4J and log4j implementation.  These are included in the
-dependencies.  The test `log4j.properties` file will ignore all
-logging.  Modify this if you want to see the logging while testing.
+The service assumes that `clojure.tools.logging` or  `com.taoensso/telemere`
+will be used.
 
-The containerized server will provide a `log4j.properties` file that
-logs everything to the console (as is typical for containers).
+The containerized server will provide env variables that
+logs info level and above to the console (as is typical for containers).
