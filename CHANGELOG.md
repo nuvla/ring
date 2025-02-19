@@ -4,6 +4,13 @@
 
 ## Released
 
+## [2.3.0](https://github.com/nuvla/ring/compare/2.2.0...2.3.0) (2025-02-19)
+
+
+### Features
+
+* **Logging:** Use telemere lib for logging and observability ([#36](https://github.com/nuvla/ring/issues/36)) ([8f534fa](https://github.com/nuvla/ring/commit/8f534fa9cf0047e8798df911f0f16f89c5ed4807))
+
 ## [2.2.0](https://github.com/nuvla/ring/compare/2.1.10...2.2.0) (2025-01-31)
 
 
